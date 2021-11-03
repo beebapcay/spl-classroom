@@ -3,6 +3,7 @@ import ClassCard from '../../components/ClassCard';
 import EmptyImage from '../../assets/images/empty_comments.png';
 import Typography from '@mui/material/Typography';
 import Navbar from '../../components/Navbar';
+import AddClassDialog from '../../components/AddClassDialog';
 import { classApi } from '../../api';
 import './index.css';
 
@@ -14,9 +15,30 @@ const Home = ({ ...props }) => {
     });
   }, []);
 
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+
+  const handleOnCreateClass = () => {
+    setOpenCreateDialog(true);
+  };
+
+  const handleOnCloseClass = () => {
+    setOpenCreateDialog(false);
+  };
+
+  const handleConfirmCreateClass = async () => {
+    await classApi.fetchClasses().then((data) => {
+      setClasses(data);
+    });
+  };
+
   return (
     <div {...props} className="home">
-      <Navbar />
+      <Navbar onCreateClass={handleOnCreateClass} />
+      <AddClassDialog
+        isOpen={openCreateDialog}
+        onClose={handleOnCloseClass}
+        onConfirm={handleConfirmCreateClass}
+      />
       <div className="main">
         {classes.length ? (
           <div className="classes-list">

@@ -5,55 +5,80 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { classApi } from '../../api';
+import { useForm } from 'react-hook-form';
 
 const AddClassDialog = ({ isOpen, onClose, onCancel, onConfirm, ...props }) => {
+  const { register, handleSubmit, reset } = useForm();
+  const defaultValues = {
+    name: '',
+    section: '',
+    subject: '',
+    room: '',
+  };
+
+  const onSubmit = async (data) => {
+    reset(defaultValues);
+    onClose();
+    await classApi.createClass(data).then((status) => console.log(status));
+    onConfirm();
+  };
+
+  const handleCancel = () => {
+    reset(defaultValues);
+    onClose();
+  };
+
+  const handleConfirm = handleSubmit(onSubmit);
+
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <Dialog open={isOpen} onClose={handleCancel}>
       <DialogTitle>Create Class</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
           id="class-name"
-          label="Class name"
+          label="Class name (require)"
           type="text"
           fullWidth
           variant="standard"
+          {...register('name', { required: true })}
         />
 
         <TextField
-          autoFocus
           margin="dense"
-          id="class-part"
-          label="Class part"
+          id="class-section"
+          label="Section"
           type="text"
           fullWidth
           variant="standard"
+          {...register('section')}
         />
 
         <TextField
-          autoFocus
           margin="dense"
           id="class-topic"
-          label="Class topic"
+          label="Topic"
           type="text"
           fullWidth
           variant="standard"
+          {...register('topic')}
         />
 
         <TextField
-          autoFocus
           margin="dense"
           id="class-room"
-          label="Class room"
+          label="Room"
           type="text"
           fullWidth
           variant="standard"
+          {...register('room')}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={onClose}>Create</Button>
+        <Button onClick={handleCancel}>Cancel</Button>
+        <Button onClick={handleConfirm}>Create</Button>
       </DialogActions>
     </Dialog>
   );

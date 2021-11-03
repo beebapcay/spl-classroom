@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Logo from '../../assets/images/mock_logo.png';
 import AvatarImage from '../../assets/images/mock_avatar.png';
 
-const Navbar = () => {
+const Navbar = ({ onCreateClass, ...props }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
@@ -25,8 +25,13 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+  const handleCreateClass = () => {
+    handleAddClose();
+    onCreateClass();
+  };
+
   return (
-    <Box>
+    <Box {...props}>
       <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 2 }}>
         <Toolbar>
           <IconButton size="large" edge="start" color="default" aria-label="menu" sx={{ mr: 1.5 }}>
@@ -69,7 +74,7 @@ const Navbar = () => {
             }}
           >
             <MenuItem onClick={handleAddClose}>Join Class</MenuItem>
-            <MenuItem onClick={handleAddClose}>Create Class</MenuItem>
+            <MenuItem onClick={handleCreateClass}>Create Class</MenuItem>
           </Menu>
           <IconButton color="default" sx={{ padding: 0.65 }}>
             <Avatar src={AvatarImage} alt="avatar" style={{ height: 35, width: 35 }} />

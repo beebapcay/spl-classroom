@@ -10,10 +10,11 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import Background from '../../assets/images/img_code.jpg';
 
 const ClassCard = ({ classItem, ...props }) => {
   return (
-    <Card {...props}>
+    <Card {...props} sx={{ boxShadow: 2 }}>
       <div style={{ position: 'relative' }}>
         <CardHeader
           action={
@@ -32,12 +33,7 @@ const ClassCard = ({ classItem, ...props }) => {
           sx={{ position: 'absolute', top: 0, right: 0, zIndex: 1 }}
         />
         <CardActionArea>
-          <CardMedia
-            component="img"
-            alt="class-background"
-            height="125"
-            image="https://source.unsplash.com/collection/190727/500x850"
-          />
+          <CardMedia component="img" alt="class-background" height="125" image={Background} />
         </CardActionArea>
       </div>
 
