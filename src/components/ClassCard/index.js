@@ -10,9 +10,12 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import Background from '../../assets/images/img_code.jpg';
+import _ from 'lodash';
+import { backgrounds } from '../../configs/default';
 
 const ClassCard = ({ classItem, ...props }) => {
+  const background = classItem.background || backgrounds[_.random(0, backgrounds.length - 1)];
+
   return (
     <Card {...props} sx={{ boxShadow: 2 }}>
       <div style={{ position: 'relative' }}>
@@ -33,7 +36,12 @@ const ClassCard = ({ classItem, ...props }) => {
           sx={{ position: 'absolute', top: 0, right: 0, zIndex: 1 }}
         />
         <CardActionArea>
-          <CardMedia component="img" alt="class-background" height="125" image={Background} />
+          <CardMedia
+            component="img"
+            alt="class-background"
+            height="125"
+            image={require(`../../assets/images/${background}`).default}
+          />
         </CardActionArea>
       </div>
 

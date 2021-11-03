@@ -7,6 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { classApi } from '../../api';
 import { useForm } from 'react-hook-form';
+import { backgrounds } from '../../configs/default';
+import _ from 'lodash';
 
 const AddClassDialog = ({ isOpen, onClose, onCancel, onConfirm, ...props }) => {
   const { register, handleSubmit, reset } = useForm();
@@ -20,8 +22,13 @@ const AddClassDialog = ({ isOpen, onClose, onCancel, onConfirm, ...props }) => {
   const onSubmit = async (data) => {
     reset(defaultValues);
     onClose();
-    await classApi.createClass(data).then((status) => console.log(status));
-    onConfirm();
+    data.background = backgrounds[_.random(0, backgrounds.length - 1)];
+    await classApi.createClass(data).then((status) => {
+      console.log(status);
+      if (status === 201) {
+        onConfirm();
+      }
+    });
   };
 
   const handleCancel = () => {

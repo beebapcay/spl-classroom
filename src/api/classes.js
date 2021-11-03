@@ -14,5 +14,5 @@ export const createClass = async (data) => {
     },
     body: JSON.stringify(data),
   });
-  return response.headers.status;
+  return response.status;
 };

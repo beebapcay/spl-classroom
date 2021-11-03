@@ -1,4 +1,4 @@
-export const background = [
+export const backgrounds = [
   'img_code.jpg',
   'img_backtoschool.jpg',
   'img_bookclub.jpg',
