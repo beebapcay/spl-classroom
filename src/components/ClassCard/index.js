@@ -17,7 +17,15 @@ const ClassCard = ({ classItem, ...props }) => {
   const background = classItem.background || backgrounds[_.random(0, backgrounds.length - 1)];
 
   return (
-    <Card {...props} sx={{ boxShadow: 2 }}>
+    <Card
+      {...props}
+      sx={{
+        boxShadow: 2,
+        '&:hover': {
+          boxShadow: 5,
+        },
+      }}
+    >
       <div style={{ position: 'relative' }}>
         <CardHeader
           action={
