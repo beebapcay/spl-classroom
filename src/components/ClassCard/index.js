@@ -11,9 +11,9 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
-const ClassCard = () => {
+const ClassCard = ({ classItem, ...props }) => {
   return (
-    <Card sx={{ width: 350 }}>
+    <Card {...props}>
       <div style={{ position: 'relative' }}>
         <CardHeader
           action={
@@ -35,18 +35,18 @@ const ClassCard = () => {
           <CardMedia
             component="img"
             alt="class-background"
-            height="140"
+            height="125"
             image="https://source.unsplash.com/collection/190727/500x850"
           />
         </CardActionArea>
       </div>
 
-      <CardContent sx={{ minHeight: 150 }}>
-        <Typography gutterBottom variant="h5" component="h2">
-          Class Name
+      <CardContent sx={{ minHeight: 135 }}>
+        <Typography gutterBottom variant="h6" component="p" sx={{ color: '#263248' }}>
+          {classItem.name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Class Type
+          {classItem.section}
         </Typography>
       </CardContent>
 
