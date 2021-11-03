@@ -1,0 +1,6 @@
+{
+  "serverUri": "https://spl-classroom-server.herokuapp.com/",
+  "api": {
+    "classes": "https://spl-classroom-server.herokuapp.com/api/v1/classes"
+  }
+}

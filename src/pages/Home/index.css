@@ -1,1 +1,30 @@
+.main {
+  padding: 0 5%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.classes-list {
+  width: 100%;
+}
+
+.empty-comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-comments-img {
+  width: 350px;
+  height: auto;
+}
+
+.empty-comments-msg {
+  text-align: center;
+  margin-top: 10px !important;
+  color: gray;
+}
