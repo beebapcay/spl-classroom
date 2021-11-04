@@ -11,12 +11,7 @@ import { backgrounds } from '../../configs/default';
 import _ from 'lodash';
 
 const AddClassDialog = ({ isOpen, onClose, onCancel, onConfirm, ...props }) => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const defaultValues = {
     name: '',
     section: '',
