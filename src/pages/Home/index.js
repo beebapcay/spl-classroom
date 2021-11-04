@@ -3,7 +3,7 @@ import ClassCard from '../../components/ClassCard';
 import EmptyImage from '../../assets/images/empty_comments.png';
 import Typography from '@mui/material/Typography';
 import Navbar from '../../components/Navbar';
-import AddClassDialog from '../../components/AddClassDialog';
+import CreateClassDialog from '../../components/CreateClassDialog';
 import { classApi } from '../../api';
 import './index.css';
 
@@ -21,11 +21,7 @@ const Home = ({ ...props }) => {
     setOpenCreateDialog(true);
   };
 
-  const handleOnCloseClass = () => {
-    setOpenCreateDialog(false);
-  };
-
-  const handleConfirmCreateClass = async () => {
+  const handleOnClassCreated = async () => {
     await classApi.fetchClasses().then((data) => {
       setClasses(data);
     });
@@ -34,10 +30,11 @@ const Home = ({ ...props }) => {
   return (
     <div {...props} className="home">
       <Navbar onCreateClass={handleOnCreateClass} />
-      <AddClassDialog
-        isOpen={openCreateDialog}
-        onClose={handleOnCloseClass}
-        onConfirm={handleConfirmCreateClass}
+      <CreateClassDialog
+        open={openCreateDialog}
+        onClose={() => setOpenCreateDialog(false)}
+        onCancel={() => setOpenCreateDialog(false)}
+        onClassCreated={handleOnClassCreated}
       />
       <div className="main">
         {classes.length ? (

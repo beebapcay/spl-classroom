@@ -51,7 +51,7 @@ const ClassCard = ({ classItem, ...props }) => {
       </div>
 
       <CardContent sx={{ minHeight: 135 }}>
-        <Typography gutterBottom variant="h5" component="p" sx={{ color: '#263248' }}>
+        <Typography gutterBottom variant="h6" component="p" sx={{ color: '#263248' }}>
           {classItem.name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">

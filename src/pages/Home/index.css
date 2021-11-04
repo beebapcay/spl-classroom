@@ -28,7 +28,8 @@
 .class-item {
   width: 23.125%;
   margin-right: 2.5%;
-  margin-bottom: 15px;
+  margin-bottom: 20px !important;
+  margin-top: 10px;
 }
 
 .class-item:nth-child(4n) {
