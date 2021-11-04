@@ -13,20 +13,18 @@ import Logo from '../../assets/images/mock_logo.png';
 import AvatarImage from '../../assets/images/mock_avatar.png';
 
 const Navbar = ({ onCreateClass, ...props }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const open = Boolean(anchorEl);
+  const [anchorAddMenu, setAnchorAddMenu] = useState(null);
 
   const handleAddClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorAddMenu(event.currentTarget);
   };
 
   const handleAddClose = () => {
-    setAnchorEl(null);
+    setAnchorAddMenu(null);
   };
 
   const handleCreateClass = () => {
-    handleAddClose();
+    setAnchorAddMenu(null);
     onCreateClass();
   };
 
@@ -59,8 +57,8 @@ const Navbar = ({ onCreateClass, ...props }) => {
           </IconButton>
           <Menu
             id="menu-add"
-            anchorEl={anchorEl}
-            open={open}
+            anchorEl={anchorAddMenu}
+            open={Boolean(anchorAddMenu)}
             onClose={handleAddClose}
             keepMounted
             elevation={3}
