@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -10,36 +10,28 @@ import { useForm } from 'react-hook-form';
 import { backgrounds } from '../../configs/default';
 import _ from 'lodash';
 
-const AddClassDialog = ({ isOpen, onClose, onCancel, onConfirm, ...props }) => {
+const CreateClassDialog = ({ open, onClose, onCancel, onConfirm, onClassCreated, ...props }) => {
   const { register, handleSubmit, reset } = useForm();
-  const defaultValues = {
-    name: '',
-    section: '',
-    subject: '',
-    room: '',
-  };
+
+  useEffect(() => {
+    reset();
+  }, [open]);
 
   const onSubmit = async (data) => {
-    reset(defaultValues);
     onClose();
     data.background = backgrounds[_.random(0, backgrounds.length - 1)];
     await classApi.createClass(data).then((status) => {
       console.log(status);
       if (status === 201) {
-        onConfirm();
+        onClassCreated();
       }
     });
-  };
-
-  const handleCancel = () => {
-    reset(defaultValues);
-    onClose();
   };
 
   const handleConfirm = handleSubmit(onSubmit);
 
   return (
-    <Dialog open={isOpen} onClose={handleCancel}>
+    <Dialog open={open} onClose={onClose} {...props}>
       <DialogTitle>Create Class</DialogTitle>
       <DialogContent>
         <TextField
@@ -84,11 +76,11 @@ const AddClassDialog = ({ isOpen, onClose, onCancel, onConfirm, ...props }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel}>Cancel</Button>
+        <Button onClick={onClose}>Cancel</Button>
         <Button onClick={handleConfirm}>Create</Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default AddClassDialog;
+export default CreateClassDialog;
